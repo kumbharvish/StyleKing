@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-06-04T18:24:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Product_Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="19306172-b07a-4fa6-b962-af877ce524aa">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="StoreName" class="java.lang.String"/>
+	<parameter name="Address" class="java.lang.String"/>
+	<parameter name="Address2" class="java.lang.String"/>
+	<parameter name="MobileNumber" class="java.lang.String"/>
+	<field name="FromDate" class="java.lang.String"/>
+	<field name="ToDate" class="java.lang.String"/>
+	<field name="ReturnNo" class="java.lang.String"/>
+	<field name="CustMobile" class="java.lang.String"/>
+	<field name="CustName" class="java.lang.String"/>
+	<field name="ReturnDate" class="java.lang.String"/>
+	<field name="NoOfItems" class="java.lang.Integer"/>
+	<field name="Qty" class="java.lang.String"/>
+	<field name="PaymentMode" class="java.lang.String"/>
+	<field name="ReturnTotalAmoount" class="java.lang.String"/>
+	<field name="TotalPendingAmt" class="java.lang.String"/>
+	<field name="TotalCashAmt" class="java.lang.String"/>
+	<field name="TotalAmount" class="java.lang.String"/>
+	<field name="TotalQty" class="java.lang.String"/>
+	<field name="TotalNoOfItems" class="java.lang.String"/>
+	<group name="Total Group">
+		<groupFooter>
+			<band height="120">
+				<staticText>
+					<reportElement mode="Opaque" x="1" y="0" width="118" height="30" backcolor="#E3E1E1" uuid="1bac6a77-030a-43e6-8e10-5d1513d24c90"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Customer Count]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="211" y="0" width="139" height="30" backcolor="#E3E1E1" uuid="ac3f1009-6067-489f-adae-4a0fc1324723"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total No of Items]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="290" y="90" width="120" height="30" backcolor="#E3E1E1" uuid="ae1df6e3-a4e6-4256-93cd-5cbfba2802c3"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Amount]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="119" y="0" width="92" height="30" forecolor="#000000" backcolor="#E3E1E1" uuid="d99e8cc8-ab43-4ffe-927c-80e56deacba6"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="350" y="0" width="60" height="30" forecolor="#000000" backcolor="#E3E1E1" uuid="bea0b819-debe-47cd-8dd0-986ee297291f"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TotalNoOfItems}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="410" y="90" width="140" height="30" forecolor="#000000" backcolor="#E3E1E1" uuid="22c1c8f0-99bd-4e15-a584-507abb43f41e"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TotalAmount}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="410" y="0" width="70" height="30" backcolor="#E3E1E1" uuid="9381cb0e-f0e5-4749-8d39-245676d857b4"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Quantity]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="480" y="0" width="70" height="30" forecolor="#000000" backcolor="#E3E1E1" uuid="b89bcb1a-6f8f-49cd-96e4-d4121803f205"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TotalQty}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="410" y="60" width="140" height="30" forecolor="#000000" backcolor="#E3E1E1" uuid="ba56525e-0568-4121-b4ba-6eb4c96e6390"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TotalCashAmt}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="290" y="60" width="120" height="30" backcolor="#E3E1E1" uuid="f915deb0-9112-40de-9b36-8556164b3c3c"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Cash Payment]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="290" y="30" width="120" height="30" backcolor="#E3E1E1" uuid="96834480-08a2-4f91-854e-bc23b93798aa"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Pending Payment]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="410" y="30" width="140" height="30" forecolor="#000000" backcolor="#E3E1E1" uuid="c2de523e-7292-44cb-b7a4-2e497ebe5d16"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TotalPendingAmt}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="0" width="370" height="24" uuid="977e3748-432a-419c-b0a2-def6e362f69e"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{StoreName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="24" width="280" height="15" uuid="4a2aed3a-ace9-47e9-b122-08f77f3ec6f8"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="39" width="280" height="15" uuid="675964e4-2a56-4d12-abfb-815b69a95871"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Address2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="54" width="280" height="15" uuid="4f21ee81-d4cd-41ff-8836-0f94538021ff">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{MobileNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="38" width="71" height="17" uuid="6341bc9b-0f75-43e7-846f-79da8cd951af"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Range:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="73" y="39" width="57" height="17" uuid="b692c139-44c9-4686-b038-c0fd2d30960e"/>
+				<textFieldExpression><![CDATA[$F{FromDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="131" y="39" width="20" height="17" uuid="5183c466-4af8-4a6b-8f04-3d82ee72fb90"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="151" y="39" width="77" height="17" uuid="c4a45c94-6c74-4dd9-9205-aa9366bde3d0"/>
+				<textFieldExpression><![CDATA[$F{ToDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="0" width="191" height="30" uuid="93c6d4fb-7d6d-44cb-8a25-7558c75dbed8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales Return Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="1" y="1" width="59" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="abc97c30-f0de-4dd4-bc7b-f59c5226122d"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Return No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="60" y="1" width="60" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="c8a70587-2f06-4249-b40f-847fc7bb8780"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cust Mobile"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="480" y="1" width="70" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="e2267b5c-fcf9-4170-b23d-b986e3f9c80f"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total Amount"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="290" y="1" width="60" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="0e3f1231-53a2-4b53-9048-8125c6c03689"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No Of Items"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="350" y="1" width="60" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="7a119dbf-a71e-4d87-9fd4-abb820f3c91e"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Qty"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="119" y="1" width="92" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="4ddea463-7f3b-4929-8042-0f65147c2f76"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Customer Name"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="211" y="1" width="79" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="7c58d1e3-2a89-48a1-a3bc-6c67430183c6"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Return Date"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="410" y="1" width="70" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="3078e96f-b10e-47ea-aa2a-4ce9489b0a2e"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pay Mode"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="59" height="21" uuid="79bbbb33-bcd8-4036-af54-934306b9132a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ReturnNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="59" height="21" uuid="82019a60-24d2-449b-a7b9-b498c65f5738"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CustMobile}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="70" height="21" uuid="d88f1267-c674-4f04-a057-a1885c43a385"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ReturnTotalAmoount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="60" height="21" uuid="94e627ad-1d32-485b-8dda-17bee065d57f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="0" width="92" height="21" uuid="f0d432ae-96fe-4e9a-bc27-35a09cca41b5"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CustName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="0" width="79" height="21" uuid="8e03aed2-6391-4ade-84dc-ca75aa1c5abb"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ReturnDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="70" height="21" uuid="f52d4ac0-efbc-4d62-a508-65b1f825a93d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PaymentMode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="60" height="21" uuid="3e51b85b-b911-4078-94ff-4f453ebf82fe"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NoOfItems}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="30" width="100" height="30" uuid="e9139ccf-a55e-488b-8974-8234c93fd760"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-07-12T08:13:05 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Product_Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="19306172-b07a-4fa6-b962-af877ce524aa">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="StoreName" class="java.lang.String"/>
+	<parameter name="Address" class="java.lang.String"/>
+	<parameter name="Address2" class="java.lang.String"/>
+	<parameter name="MobileNumber" class="java.lang.String"/>
+	<field name="MobileNo" class="java.lang.String"/>
+	<field name="Name" class="java.lang.String"/>
+	<field name="City" class="java.lang.String"/>
+	<field name="Email" class="java.lang.String"/>
+	<field name="BalanceAmt" class="java.lang.String"/>
+	<field name="EntryDate" class="java.lang.String"/>
+	<variable name="VTotalBalanceAmt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{BalanceAmt})]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="TotalGroup">
+		<groupFooter>
+			<band height="97">
+				<staticText>
+					<reportElement mode="Opaque" x="290" y="30" width="110" height="30" backcolor="#E3E1E1" uuid="75e871c3-f736-4f73-a4e0-0dc1a85fda60"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Pending Amount]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="400" y="30" width="150" height="30" forecolor="#000000" backcolor="#E3E1E1" uuid="5b4e5c28-8290-47d0-9e0c-c54135c4e3c0"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#0.00").format($V{VTotalBalanceAmt})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="290" y="0" width="110" height="30" backcolor="#E3E1E1" uuid="6abc4136-6861-4b00-b264-3e5f1853bc23"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Customers]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="400" y="0" width="150" height="30" forecolor="#000000" backcolor="#E3E1E1" uuid="0658f616-c9f2-4569-a81d-379cf7891ead"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="38" width="71" height="19" uuid="2a1f02ce-9bc8-417b-9f64-33ffc1839bc3"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Report Date :]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="73" y="39" width="100" height="17" uuid="f510691a-63ad-46b9-9356-0b8c913f5104"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="370" height="24" uuid="2f762115-fb91-4b11-9ee2-7142d4ecef25"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{StoreName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="24" width="370" height="15" uuid="724b0895-ab85-4fe1-a6a6-9911cc27798c"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="39" width="370" height="15" uuid="88869165-b121-4a77-a3f4-2961cbd5ada2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Address2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="54" width="370" height="15" uuid="f3eac650-acdf-4f81-a346-a46518625d0c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{MobileNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="0" width="191" height="30" uuid="93c6d4fb-7d6d-44cb-8a25-7558c75dbed8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customers Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="1" y="1" width="89" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="abc97c30-f0de-4dd4-bc7b-f59c5226122d"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mobile No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="90" y="1" width="130" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="c8a70587-2f06-4249-b40f-847fc7bb8780"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Name"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="480" y="1" width="70" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="e2267b5c-fcf9-4170-b23d-b986e3f9c80f"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["P. Amt"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="220" y="1" width="70" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="0e3f1231-53a2-4b53-9048-8125c6c03689"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["City"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="290" y="1" width="110" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="7a119dbf-a71e-4d87-9fd4-abb820f3c91e"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Email"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="400" y="1" width="80" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="68c22190-a100-4666-9063-005b9bff6891"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Entry Date"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="89" height="21" uuid="79bbbb33-bcd8-4036-af54-934306b9132a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MobileNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="0" width="130" height="21" uuid="82019a60-24d2-449b-a7b9-b498c65f5738"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="70" height="21" uuid="d88f1267-c674-4f04-a057-a1885c43a385"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BalanceAmt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="70" height="21" uuid="e249069f-a2f5-41e0-ba3d-99af75003f68"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{City}!=null?$F{City}:""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="110" height="21" uuid="94e627ad-1d32-485b-8dda-17bee065d57f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Email}!=null?$F{Email}:""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="80" height="21" uuid="cf45f14d-a3b1-48ca-b063-56479bf20c04"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EntryDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="30" width="100" height="30" uuid="e9139ccf-a55e-488b-8974-8234c93fd760"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-04-29T19:27:36 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Product_Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="19306172-b07a-4fa6-b962-af877ce524aa">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="StoreName" class="java.lang.String"/>
+	<parameter name="Address" class="java.lang.String"/>
+	<parameter name="Address2" class="java.lang.String"/>
+	<parameter name="MobileNumber" class="java.lang.String"/>
+	<field name="ProductName" class="java.lang.String"/>
+	<field name="ProductCode" class="java.lang.String"/>
+	<field name="CategoryName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="73" y="39" width="100" height="17" uuid="26f4a46b-7f1a-447f-8e73-c78800a76086"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="38" width="71" height="19" uuid="b5a17cdb-98ed-4f15-91aa-d710dd9b4615"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Report Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="54" width="370" height="15" uuid="eabe1938-4fac-4828-9324-b60cb9d7308c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{MobileNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="39" width="370" height="15" uuid="1ae3a31f-a91e-4a04-bb47-d038da058770"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Address2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="24" width="370" height="15" uuid="c47018c8-6242-4842-958c-90d710db61ed"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="370" height="24" uuid="c3dec5c5-fb62-496c-937c-75644f547807"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{StoreName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="1" width="199" height="30" uuid="93c6d4fb-7d6d-44cb-8a25-7558c75dbed8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zero Stock Products Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="1" y="1" width="109" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="abc97c30-f0de-4dd4-bc7b-f59c5226122d"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Product Code"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="110" y="1" width="269" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="c8a70587-2f06-4249-b40f-847fc7bb8780"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Product Name"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="379" y="1" width="171" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="e2267b5c-fcf9-4170-b23d-b986e3f9c80f"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Product Category"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="109" height="21" uuid="79bbbb33-bcd8-4036-af54-934306b9132a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProductCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="269" height="21" uuid="82019a60-24d2-449b-a7b9-b498c65f5738"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProductName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="171" height="21" uuid="d88f1267-c674-4f04-a057-a1885c43a385"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CategoryName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="30" width="100" height="30" uuid="e9139ccf-a55e-488b-8974-8234c93fd760"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

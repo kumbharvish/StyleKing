@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-04-29T19:24:26 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Product_Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="19306172-b07a-4fa6-b962-af877ce524aa">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="StoreName" class="java.lang.String"/>
+	<parameter name="Address" class="java.lang.String"/>
+	<parameter name="Address2" class="java.lang.String"/>
+	<parameter name="MobileNumber" class="java.lang.String"/>
+	<field name="ProductName" class="java.lang.String"/>
+	<field name="ProductCode" class="java.lang.String"/>
+	<field name="ProductProfitAmt" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="73" y="39" width="100" height="17" uuid="4796d187-1b32-444e-926c-268e1e75f30f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="38" width="71" height="19" uuid="f3236e98-22dd-42c8-befb-d6437fc51536"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Report Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="0" width="370" height="24" uuid="377f1622-9491-4957-a535-7e9a8c7af2a7"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{StoreName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="24" width="370" height="15" uuid="480d76dd-05be-4fae-b49f-c550816af290"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="39" width="370" height="15" uuid="3a5b3a30-d927-43bd-aae0-e5de42a4b029"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Address2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="54" width="370" height="15" uuid="799e741f-d297-4caf-896e-d31b7e7117ab">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{MobileNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="199" y="1" width="159" height="30" uuid="93c6d4fb-7d6d-44cb-8a25-7558c75dbed8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Profit Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="1" y="1" width="129" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="abc97c30-f0de-4dd4-bc7b-f59c5226122d"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Product Code"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="130" y="1" width="270" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="c8a70587-2f06-4249-b40f-847fc7bb8780"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Product Name"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="400" y="1" width="150" height="19" forecolor="#FFFFFF" backcolor="#852D2C" uuid="e2267b5c-fcf9-4170-b23d-b986e3f9c80f"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Product Profit Amount"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="129" height="21" uuid="79bbbb33-bcd8-4036-af54-934306b9132a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProductCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="270" height="21" uuid="82019a60-24d2-449b-a7b9-b498c65f5738"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProductName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="150" height="21" uuid="d88f1267-c674-4f04-a057-a1885c43a385"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProductProfitAmt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="30" width="100" height="30" uuid="e9139ccf-a55e-488b-8974-8234c93fd760"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
