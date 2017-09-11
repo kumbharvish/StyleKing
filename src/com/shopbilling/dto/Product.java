@@ -53,6 +53,37 @@ public class Product {
 	private int supplierId;
 	
 	private Timestamp timeStamp;
+	
+	private String size;
+	
+	private String designNo;
+	
+	private String styleCode;
+	
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public String getDesignNo() {
+		return designNo;
+	}
+
+	public void setDesignNo(String designNo) {
+		this.designNo = designNo;
+	}
+
+	public String getStyleCode() {
+		return styleCode;
+	}
+
+	public void setStyleCode(String styleCode) {
+		this.styleCode = styleCode;
+	}
 
 	public int getProductCode() {
 		return productCode;

@@ -53,10 +53,11 @@ public class ManageProductsUI extends JInternalFrame {
 	private UserDetails userDetails;
 	JTextField productCode ;
 	JTextField productName;
-	JTextField productDescription; 
+	JTextField designNo; 
+	JTextField styleCode; 
 	JTextField quantity ;
 	JComboBox<String> productCategory;
-	JComboBox<String> measure;
+	JComboBox<String> size;
 	JTextField purchasePrice ;
 	JTextField purchaseRate ;
 	JTextField productBarCode ;
@@ -127,24 +128,25 @@ public class ManageProductsUI extends JInternalFrame {
 		 productCode.setFont(new Font("Tahoma", Font.BOLD, 12));
 		 productName = new JTextField(20);
 		 productName.setFont(new Font("Tahoma", Font.BOLD, 12));
-		 productDescription = new JTextField(20);
-		 productDescription.setFont(new Font("Tahoma", Font.BOLD, 12));
+		 designNo = new JTextField(20);
+		 designNo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		 styleCode = new JTextField(20);
+		 styleCode.setFont(new Font("Tahoma", Font.BOLD, 12));
 		 quantity = new JTextField(10);
 		 quantity.setFont(new Font("Tahoma", Font.BOLD, 12));
 		 quantity.setDisabledTextColor(Color.BLACK);
 		 productCategory = new JComboBox<String>();
 		 //Fill category in dropdown
 		 populateCategories(productCategory);
-		 measure = new JComboBox<String>();
-		 measure.setRenderer(new DefaultListCellRenderer() {
+		 size= new JComboBox<String>();
+		 size.setRenderer(new DefaultListCellRenderer() {
 		        @Override
 		        public void paint(Graphics g) {
 		            setForeground(Color.BLACK);
 		            super.paint(g);
 		        }
 		    });
-		 populateUnits(measure);
-		 measure.setEnabled(false);
+		 populateSize(size);
 		 purchasePrice = new JTextField();
 		 purchasePrice.setFont(new Font("Tahoma", Font.BOLD, 12));
 		 purchasePrice.setEnabled(false);
@@ -177,7 +179,7 @@ public class ManageProductsUI extends JInternalFrame {
  		productEntryLayout.emptyRow();
  		productEntryLayout.row().grid(new JLabel("Product Name *:"))	.add(productName);
  		productEntryLayout.emptyRow();
- 		productEntryLayout.row().grid(new JLabel("Unit *:"))	.add(measure);
+ 		productEntryLayout.row().grid(new JLabel("Size *:"))	.add(size);
  		productEntryLayout.emptyRow();
  		productEntryLayout.row().grid(new JLabel("Quantity *:"))	.add(quantity);
  		productEntryLayout.emptyRow();
@@ -192,11 +194,13 @@ public class ManageProductsUI extends JInternalFrame {
  		//productEntryLayout.row().grid(new JLabel("Last Update :"))	.add(lastUpdate);
  		productEntryLayout.row().grid(new JLabel("Bar Code :"))	.add(productBarCode);
  		productEntryLayout.emptyRow();
+ 		productEntryLayout.row().grid(new JLabel("Design No *:"))	.add(designNo);
+ 		productEntryLayout.emptyRow();
+ 		productEntryLayout.row().grid(new JLabel("Style *:"))	.add(styleCode);
+ 		productEntryLayout.emptyRow();
  		productEntryLayout.row().grid(new JLabel("Entered By :"))	.add(enterBy);
  		productEntryLayout.emptyRow();
  		productEntryLayout.row().grid(new JLabel("Entry Date :"))	.add(entryDate);
- 		productEntryLayout.emptyRow();
- 		productEntryLayout.row().grid(new JLabel("Description :"))	.add(productDescription);
  		productEntryLayout.emptyRow();
  		productEntryLayout.row().center().add(btnProductSave).add(btnProductUpdate).add(btnProductDelete).add(btnProductReset);
  		
@@ -386,7 +390,9 @@ public class ManageProductsUI extends JInternalFrame {
 	public void resetProductTextFields(){
 		productCode.setText("");
 		productName.setText("");
-		productDescription.setText("");
+		designNo.setText("");
+		size.setSelectedIndex(0);
+		styleCode.setText("");
 		quantity.setText("");
 		purchasePrice.setText("");
 		purchaseRate.setText("");
@@ -411,14 +417,13 @@ public class ManageProductsUI extends JInternalFrame {
 		}
 		
 	}
-	//populate units in dropdown
-	public void populateUnits(JComboBox<String> units){
-		/*//List<String> unitsList = AppUtils.getAppDataValues("MEASURES");
-		
+	//populate SIZE in dropdown
+	public void populateSize(JComboBox<String> units){
+		List<String> unitsList = PDFUtils.getAppDataValues("SHIRT_SIZE");
+		units.addItem("--- SELECT SIZE---");
 		for (String unit : unitsList){
 			units.addItem(unit);
-		}*/
-		units.addItem("Quantity");
+		}
 	}
 
 	public UserDetails getUserDetails() {
@@ -457,14 +462,18 @@ public class ManageProductsUI extends JInternalFrame {
 		}else{
 			if(PDFUtils.isMandatoryEntered(productName) && PDFUtils.isMandatoryEntered(quantity)
 					&& PDFUtils.isMandatoryEntered(purchaseRate)&&PDFUtils.isMandatoryEntered(productTax)  
-					&& PDFUtils.isMandatoryEntered(sellingPrice) && PDFUtils.isMandatorySelected(productCategory)){
+					&& PDFUtils.isMandatoryEntered(sellingPrice) && PDFUtils.isMandatorySelected(productCategory)&& PDFUtils.isMandatoryEntered(designNo)
+					&& PDFUtils.isMandatoryEntered(styleCode) && PDFUtils.isMandatorySelected(size)){
 					Product productToUpdate = new Product();
 					productToUpdate.setProductCode(Integer.valueOf(productCode.getText()));
 					productToUpdate.setProductName(productName.getText());
-					productToUpdate.setDescription(productDescription.getText());
-					productToUpdate.setMeasure((String)measure.getSelectedItem());
+					productToUpdate.setDescription("");
+					productToUpdate.setDesignNo(designNo.getText());
+					productToUpdate.setStyleCode(styleCode.getText());
+					productToUpdate.setMeasure("Quantity");
 					productToUpdate.setQuanity(Integer.valueOf(quantity.getText()));
 					//productToUpdate.setProductCategory((String)productCategory.getSelectedItem());
+					productToUpdate.setSize((String)size.getSelectedItem());
 					productToUpdate.setCategoryCode(productCategoryMap.get((String)productCategory.getSelectedItem()));
 					productToUpdate.setDiscount(0);
 					/*if(discount.getText().equals("")){
@@ -537,12 +546,17 @@ public class ManageProductsUI extends JInternalFrame {
 		if(productCode.getText().equals("")){
 			if(PDFUtils.isMandatoryEntered(productName) && PDFUtils.isMandatoryEntered(quantity)
 				&& PDFUtils.isMandatoryEntered(purchasePrice) 
-				&& PDFUtils.isMandatoryEntered(sellingPrice)&& PDFUtils.isMandatorySelected(productCategory)){
+				&& PDFUtils.isMandatoryEntered(sellingPrice)&& PDFUtils.isMandatorySelected(productCategory)
+				&& PDFUtils.isMandatoryEntered(designNo) && PDFUtils.isMandatoryEntered(styleCode)
+				 && PDFUtils.isMandatorySelected(size)){
 				Product productToSave = new Product();
 				productToSave.setProductCode(PDFUtils.getRandomCode());
 				productToSave.setProductName(productName.getText());
-				productToSave.setDescription(productDescription.getText());
-				productToSave.setMeasure((String)measure.getSelectedItem());
+				productToSave.setDescription("");
+				productToSave.setDesignNo(designNo.getText());
+				productToSave.setStyleCode(styleCode.getText());
+				productToSave.setMeasure("Quantity");
+				productToSave.setSize((String)size.getSelectedItem());
 				productToSave.setQuanity(Integer.valueOf(quantity.getText()));
 				//productToSave.setProductCategory((String)productCategory.getSelectedItem());
 				productToSave.setCategoryCode(productCategoryMap.get((String)productCategory.getSelectedItem()));
@@ -611,7 +625,8 @@ public class ManageProductsUI extends JInternalFrame {
 		Product product = ProductServices.getProduct(productCodeLocal);
 		productCode.setText(String.valueOf(product.getProductCode()));
 		productName.setText(product.getProductName());
-		productDescription.setText(product.getDescription());
+		designNo.setText(product.getDesignNo());
+		styleCode.setText(product.getStyleCode());
 		quantity.setText(String.valueOf(product.getQuanity()));
 		purchaseRate.setText(PDFUtils.getDecimalFormat(product.getPurcaseRate()));
 		productTax.setText(PDFUtils.getDecimalFormat(product.getProductTax()));
@@ -623,6 +638,7 @@ public class ManageProductsUI extends JInternalFrame {
 		enterBy.setText(product.getEnterBy());
 		entryDate.setText(product.getEntryDate().toString());
 		productCategory.setSelectedItem(product.getProductCategory());
+		size.setSelectedItem(product.getSize());
 		
 	}
 	

@@ -114,6 +114,45 @@ public class JasperUtils {
         }
         return isSucess;
     }
+
+	public static void createPDFForBarcode(List<Map<String,?>> dataSourceMap, String barcodeJasper, String fileName) {
+        try {	        	
+            // load report location
+        	String homeLocation = PDFUtils.getAppDataValues(AppConstants.MYSTORE_HOME).get(0);
+        	String jrxmlLocation = homeLocation+"\\Jrxml\\"+barcodeJasper;
+        	//With JRXML
+        	//JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlLocation);
+        	
+        	//With Jasper File
+        	FileInputStream fis = new FileInputStream(jrxmlLocation);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fis);
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(bufferedInputStream);
+            
+            JRMapCollectionDataSource dataSource = new JRMapCollectionDataSource(dataSourceMap);
+
+            //Add Report Headers
+             HashMap<String,Object> headerParamsMap = new HashMap<String, Object>();
+                         
+            // compile report
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,headerParamsMap, dataSource);            
+            
+            // view report to UI
+            //JasperViewer.viewReport(jasperPrint, false);
+            //Export To PDF
+            //String fileLocation = homeLocation+"\\"+AppConstants.BARCODE_SHEET_FOLER+"\\";
+           // String billNumber = (String)dataSourceMap.get(0).get("BillNo");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            
+            JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
+            /*if("Y".equals(AppUtils.getAppDataValues(AppConstants.IS_THERMAL_PRINTER_SET).get(0))){
+            	JasperPrintManager.printReport(jasperPrint, false);
+            }*/
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	logger.error("Jasper Bill Exception: ",e);
+        	
+        }
+    }
 	    
 	/*public static void main(String[] args) {
 		

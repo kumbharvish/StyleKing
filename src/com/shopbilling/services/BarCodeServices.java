@@ -18,7 +18,7 @@ import com.itextpdf.text.pdf.PdfWriter;
  
 public class BarCodeServices {
  
-    public static void createPdf(String dest,String barcode,String productName,int noOfPages) throws IOException, DocumentException {
+    public static void createPdf(String dest,String barcode,String productName) throws IOException, DocumentException {
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
@@ -31,10 +31,7 @@ public class BarCodeServices {
                 document.top() + 10, 0);
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100);
-        int noOfBaracodes = noOfPages*52;
-        for (int i = 0; i < noOfBaracodes; i++) {
-            table.addCell(createBarcode(writer, barcode,productName));
-        }
+        table.addCell(createBarcode(writer, barcode,productName));       
         document.add(table);
         document.close();
     }

@@ -16,6 +16,8 @@ public class AppConstants {
 	
 	public static final String CUSTOMERS_REPORT_JRXML = "Customers_Report.jasper";
 	
+	public static final String BARCODE_JASPER = "Barcode.jasper";
+	
 	public static final String STOCK_VALUE_REPORT_JRXML = "Sales_Stock_Value_Report.jasper";
 	
 	public static final String CATEGORY_WISE_STOCK_REPORT = "Category_Wise_Stock_Report.jasper";
