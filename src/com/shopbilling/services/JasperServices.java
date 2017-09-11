@@ -1,11 +1,13 @@
 package com.shopbilling.services;
 
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shopbilling.constants.AppConstants;
 import com.shopbilling.dto.BillDetails;
 import com.shopbilling.dto.Customer;
 import com.shopbilling.dto.ItemDetails;
@@ -152,4 +154,18 @@ public class JasperServices {
 	       }  
 	       return dataSourceMaps;
 		}
+		public static List<Map<String, ?>>  createDataForBarcode(Product product) {
+			 List<Map<String,?>> dataSourceMaps = new ArrayList<Map<String, ?>> ();
+	         
+             Map<String,Object> map = new HashMap<String, Object>();
+             
+             map.put("DNo", product.getDesignNo());
+             map.put("Style", product.getStyleCode());
+             map.put("MRP", PDFUtils.getAmountFormat(product.getSellPrice()));
+             map.put("Barcode", Long.toString(product.getProductBarCode()));
+             map.put("Size", product.getSize());
+             dataSourceMaps.add(map);
+           
+         return dataSourceMaps;
+	}
 }

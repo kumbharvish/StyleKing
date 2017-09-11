@@ -21,34 +21,35 @@ public class ProductServices {
 
 	private static final String GET_ALL_PRODUCTS = "SELECT  PD.PRODUCT_ID,PD.PRODUCT_NAME,PD.MEASURE,PD.QUANTITY,PD.PURCHASE_PRICE,PD.SELL_PRICE," +
 												"PD.PRODUCT_MRP,PD.DISCOUNT,PD.ENTRY_DATE,PD.LAST_UPDATE_DATE,PD.DESCRIPTION,PD.ENTER_BY," +
-												"PD.PURCHASE_RATE,PD.PRODUCT_TAX,PD.BAR_CODE,PCD.CATEGORY_NAME " +
+												"PD.PURCHASE_RATE,PD.PRODUCT_TAX,PD.BAR_CODE,PCD.CATEGORY_NAME,PD.STYLE_CODE,PD.DESIGN_NO,PD.SIZE " +
 												"FROM PRODUCT_DETAILS PD,PRODUCT_CATEGORY_DETAILS PCD WHERE PD.CATEGORY_ID = PCD.CATEGORY_ID;";
 	
 	private static final String GET_ALL_PRODUCTS_WITH_NO_BARCODE = "SELECT  PD.PRODUCT_ID,PD.PRODUCT_NAME,PD.MEASURE,PD.QUANTITY,PD.PURCHASE_PRICE,PD.SELL_PRICE," +
 																"PD.PRODUCT_MRP,PD.DISCOUNT,PD.ENTRY_DATE,PD.LAST_UPDATE_DATE,PD.DESCRIPTION,PD.ENTER_BY," +
-																"PD.PURCHASE_RATE,PD.PRODUCT_TAX,PD.BAR_CODE,PCD.CATEGORY_NAME " +
+																"PD.PURCHASE_RATE,PD.PRODUCT_TAX,PD.BAR_CODE,PCD.CATEGORY_NAME,PD.STYLE_CODE,PD.DESIGN_NO,PD.SIZE  " +
 																"FROM PRODUCT_DETAILS PD,PRODUCT_CATEGORY_DETAILS PCD WHERE PD.CATEGORY_ID = PCD.CATEGORY_ID AND BAR_CODE=0;";
 	
 	private static final String SEARCH_PRODUCTS ="SELECT  PD.PRODUCT_ID,PD.PRODUCT_NAME,PD.MEASURE,PD.QUANTITY,PD.PURCHASE_PRICE,PD.SELL_PRICE," +
 												"PD.PRODUCT_MRP,PD.DISCOUNT,PD.ENTRY_DATE,PD.LAST_UPDATE_DATE,PD.DESCRIPTION,PD.ENTER_BY," +
-												"PD.PURCHASE_RATE,PD.PRODUCT_TAX,PD.BAR_CODE,PCD.CATEGORY_NAME " +
+												"PD.PURCHASE_RATE,PD.PRODUCT_TAX,PD.BAR_CODE,PCD.CATEGORY_NAME,PD.STYLE_CODE,PD.DESIGN_NO,PD.SIZE  " +
 												"FROM PRODUCT_DETAILS PD,PRODUCT_CATEGORY_DETAILS PCD WHERE PD.CATEGORY_ID = PCD.CATEGORY_ID AND CONCAT(PD.SELL_PRICE,PD.PRODUCT_NAME,PCD.CATEGORY_NAME) LIKE ?;";
 	
 	private static final String INS_PRODUCT = "INSERT INTO PRODUCT_DETAILS (PRODUCT_ID,PRODUCT_NAME,MEASURE,QUANTITY,PURCHASE_PRICE," +
-											  "SELL_PRICE,PRODUCT_MRP,DISCOUNT,ENTRY_DATE,LAST_UPDATE_DATE,DESCRIPTION,ENTER_BY,CATEGORY_ID,PURCHASE_RATE,PRODUCT_TAX,BAR_CODE)" +
-											  " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+											  "SELL_PRICE,PRODUCT_MRP,DISCOUNT,ENTRY_DATE,LAST_UPDATE_DATE,DESCRIPTION,ENTER_BY,CATEGORY_ID,PURCHASE_RATE,PRODUCT_TAX,BAR_CODE,STYLE_CODE,DESIGN_NO,SIZE)" +
+											  " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	private static final String DELETE_PRODUCT = "DELETE FROM PRODUCT_DETAILS WHERE PRODUCT_ID=?";
 	
 	private static final String SELECT_PRODUCT = "SELECT  PD.PRODUCT_ID,PD.PRODUCT_NAME,PD.MEASURE,PD.QUANTITY,PD.PURCHASE_PRICE,PD.SELL_PRICE," +
 												"PD.PRODUCT_MRP,PD.DISCOUNT,PD.ENTRY_DATE,PD.LAST_UPDATE_DATE,PD.DESCRIPTION,PD.ENTER_BY," +
-												"PD.PURCHASE_RATE,PD.PRODUCT_TAX,PD.BAR_CODE,PCD.CATEGORY_NAME " +
+												"PD.PURCHASE_RATE,PD.PRODUCT_TAX,PD.BAR_CODE,PCD.CATEGORY_NAME,PD.STYLE_CODE,PD.DESIGN_NO,PD.SIZE  " +
 												"FROM PRODUCT_DETAILS PD,PRODUCT_CATEGORY_DETAILS PCD WHERE PD.CATEGORY_ID = PCD.CATEGORY_ID AND PRODUCT_ID=?;";
 
+	private static final String SELECT_PRODUCT_BY_PRODUCT_NAME = "SELECT PD.DESIGN_NO, PD.STYLE_CODE,PD.SIZE, PD.SELL_PRICE, PD.BAR_CODE FROM PRODUCT_DETAILS PD WHERE PD.PRODUCT_NAME=?;";
 	
 	private static final String UPDATE_PRODUCT ="UPDATE PRODUCT_DETAILS SET PRODUCT_NAME=?,MEASURE=?,QUANTITY=?,PURCHASE_PRICE=?," +
 												"SELL_PRICE=?,PRODUCT_MRP=?,DISCOUNT=?,LAST_UPDATE_DATE=?,DESCRIPTION=?," +
-												"ENTER_BY=?,CATEGORY_ID=?,PURCHASE_RATE=?,PRODUCT_TAX=?,BAR_CODE=? WHERE PRODUCT_ID=?";
+												"ENTER_BY=?,CATEGORY_ID=?,PURCHASE_RATE=?,PRODUCT_TAX=?,BAR_CODE=?,STYLE_CODE=?,DESIGN_NO=?,SIZE=? WHERE PRODUCT_ID=?";
 	
 	private static final String UPDATE_PRODUCT_PURCHASE_HISTORY ="UPDATE PRODUCT_DETAILS SET PURCHASE_PRICE=?,LAST_UPDATE_DATE=?,PURCHASE_RATE=?,PRODUCT_TAX=? WHERE PRODUCT_ID=?";
 	
@@ -111,7 +112,10 @@ public class ProductServices {
 				pc.setEnterBy(rs.getString("ENTER_BY"));
 				pc.setProductCategory(rs.getString("CATEGORY_NAME"));
 				pc.setProductBarCode(rs.getLong("BAR_CODE"));
-
+				pc.setStyleCode(rs.getString("STYLE_CODE"));
+				pc.setDesignNo(rs.getString("DESIGN_NO"));
+				pc.setSize(rs.getString("SIZE"));
+				
 				productList.add(pc);
 				Comparator<Product> cp = Product.getComparator(Product.SortParameter.CATEGORY_NAME_ASCENDING); 
 				Collections.sort(productList,cp);
@@ -154,6 +158,9 @@ public class ProductServices {
 				pc.setPurcaseRate(rs.getDouble("PURCHASE_RATE"));
 				pc.setProductTax(rs.getDouble("PRODUCT_TAX"));
 				pc.setProductBarCode(rs.getLong("BAR_CODE"));
+				pc.setStyleCode(rs.getString("STYLE_CODE"));
+				pc.setDesignNo(rs.getString("DESIGN_NO"));
+				pc.setSize(rs.getString("SIZE"));
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -168,6 +175,7 @@ public class ProductServices {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		StatusDTO status= new StatusDTO();
+		
 		try {
 			if(product!=null){
 				conn = PDFUtils.getConnection();
@@ -189,6 +197,9 @@ public class ProductServices {
 				stmt.setDouble(14,product.getPurcaseRate());
 				stmt.setDouble(15,product.getProductTax());
 				stmt.setLong(16,product.getProductBarCode());
+				stmt.setString(17, product.getStyleCode());
+				stmt.setString(18, product.getDesignNo());
+				stmt.setString(19, product.getSize());
 
 				
 				int i = stmt.executeUpdate();
@@ -250,7 +261,10 @@ public class ProductServices {
 				stmt.setDouble(12,product.getPurcaseRate());
 				stmt.setDouble(13,product.getProductTax());
 				stmt.setLong(14, product.getProductBarCode());
-				stmt.setInt(15, product.getProductCode());
+				stmt.setString(15, product.getStyleCode());
+				stmt.setString(16, product.getDesignNo());
+				stmt.setString(17, product.getSize());
+				stmt.setInt(18, product.getProductCode());
 				
 				int i = stmt.executeUpdate();
 				if(i>0){
@@ -762,5 +776,32 @@ public class ProductServices {
 			PDFUtils.closeConnectionAndStatment(conn, stmt);
 		}
 		return status;
+	}
+
+	public static Product getProductByProductName(String productName) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		Product pc = new Product();
+		try {
+			conn = PDFUtils.getConnection();
+			stmt = conn.prepareStatement(SELECT_PRODUCT_BY_PRODUCT_NAME);
+			stmt.setString(1, productName.trim());
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				System.out.println(rs.getDouble("SELL_PRICE"));
+				pc.setSellPrice(rs.getDouble("SELL_PRICE"));
+				pc.setProductBarCode(rs.getLong("BAR_CODE"));
+				pc.setStyleCode(rs.getString("STYLE_CODE"));
+				pc.setDesignNo(rs.getString("DESIGN_NO"));
+				pc.setSize(rs.getString("SIZE"));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			PDFUtils.closeConnectionAndStatment(conn, stmt);
+		}
+		return pc;
 	}
 }

@@ -32,7 +32,9 @@ import com.shopbilling.constants.AppConstants;
 import com.shopbilling.dto.Product;
 import com.shopbilling.services.AutoSuggestTable;
 import com.shopbilling.services.BarCodeServices;
+import com.shopbilling.services.JasperServices;
 import com.shopbilling.services.ProductServices;
+import com.shopbilling.utils.JasperUtils;
 import com.shopbilling.utils.PDFUtils;
 
 public class PrintBarcodeSheetUI extends JInternalFrame {
@@ -43,7 +45,6 @@ public class PrintBarcodeSheetUI extends JInternalFrame {
 	private JTextField tf_CategoryName;
 	private JTextField tf_Barcode;
 	private AutoSuggestTable<String> autoSuggestTable;
-	private JComboBox comboBox;
 	private String fileName;
 	private String fileLocation;
 	private final static Logger logger = Logger.getLogger(PrintBarcodeSheetUI.class);
@@ -144,49 +145,38 @@ public class PrintBarcodeSheetUI extends JInternalFrame {
 		tf_Barcode.setBorder(border);
 		tf_Barcode.setBounds(196, 173, 279, 25);
 		panel_1.add(tf_Barcode);
-		
-		JLabel lblNewLabel = new JLabel("Note : One A4 Size Page holds 52 Barcode labels");
-		lblNewLabel.setBounds(155, 228, 294, 14);
-		panel_1.add(lblNewLabel);
-		
-		JLabel lblSelectNoOf = new JLabel("Select No of Pages :");
-		lblSelectNoOf.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblSelectNoOf.setBounds(77, 290, 120, 27);
-		panel_1.add(lblSelectNoOf);
-		
-		comboBox = new JComboBox();
-		comboBox.setBounds(207, 290, 217, 27);
-		comboBox.addItem("Page 1 : 52 Barcode Labels");
-		comboBox.addItem("Page 2 : 104 Barcode Labels");
-		comboBox.addItem("Page 3 : 156 Barcode Labels");
-		comboBox.addItem("Page 4 : 208 Barcode Labels");
-		comboBox.addItem("Page 5 : 260 Barcode Labels");
-		
-		panel_1.add(comboBox);
 		fileLocation = PDFUtils.getAppDataValues(AppConstants.MYSTORE_HOME).get(0)+AppConstants.BARCODE_SHEET_FOLER+"\\";
 		
-		JButton btnCreateBarcodeSheet = new JButton("Create Barcode Sheet");
+		JButton btnCreateBarcodeSheet = new JButton("Create Barcode Label");
 		btnCreateBarcodeSheet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(PDFUtils.isMandatoryEntered(tf_Barcode) && PDFUtils.isMandatoryEntered(tf_ProductName)){
-					BarCodeServices barcode = new BarCodeServices();
+					if(!tf_Barcode.getText().trim().equals("0")) {
+					BarCodeServices barcode = new BarCodeServices();					
+					//Product product = ProductServices.getProductByProductName(tf_ProductName.getText());
+					Product product = productMap.get(autoSuggestTable.getText());
 					try {
 						fileName = fileLocation+tf_ProductName.getText()+".pdf";
-						int noOfPages = comboBox.getSelectedIndex()+1;
-						barcode.createPdf(fileName, tf_Barcode.getText().trim(), tf_ProductName.getText(),noOfPages);
-						JOptionPane.showMessageDialog(getContentPane(), "Barcode Sheet Ready at "+fileName);
+						JasperUtils.createPDFForBarcode(JasperServices.createDataForBarcode(product),AppConstants.BARCODE_JASPER,fileName);
+						
+					//int noOfPages = comboBox.getSelectedIndex()+1;
+						//barcode.createPdf(fileName, tf_Barcode.getText().trim(), tf_ProductName.getText());
+						JOptionPane.showMessageDialog(getContentPane(), "Barcode Label Ready at "+fileName);
 						PDFUtils.openWindowsDocument(fileName);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 						logger.error("Print Barcode Sheet Exception : ",e1);
 					} 
+					}else {
+						JOptionPane.showMessageDialog(getContentPane(), "Please generate barcode number first for this product !");
+					}
 				}else{
 					JOptionPane.showMessageDialog(getContentPane(), "Please Select the Product !");
 				}
 				
 			}
 		});
-		btnCreateBarcodeSheet.setBounds(175, 380, 211, 23);
+		btnCreateBarcodeSheet.setBounds(154, 255, 211, 23);
 		panel_1.add(btnCreateBarcodeSheet);
 		
 		autoSuggestTable.addKeyListener(new KeyAdapter() {
@@ -219,8 +209,7 @@ public class PrintBarcodeSheetUI extends JInternalFrame {
 		tf_StockQty.setText("");
 	}
 
-	public List<String> getProductName(){
-		
+	public List<String> getProductName(){		
 		List<String> productNameList = new ArrayList<String>();
 		productMap = new HashMap<String, Product>();
 		for(Product product :ProductServices.getAllProducts()){
